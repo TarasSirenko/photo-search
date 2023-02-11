@@ -1,0 +1,55 @@
+{{#each this}}
+<div class="photo-card video" data-id={{this.id}} data-type={{this.type}}>
+    <video id="my-player" class="video-js vjs-theme-city" controls preload="auto" poster="{{this.picture_id}}" >
+        <source src="{{this.videos.tiny.url}}" type="video/mp4">
+        </source>
+        <source src="{{this.videos.tiny.url}}" type="video/webm">
+        </source>
+        <source src="{{this.videos.tiny.url}}" type="video/ogg">
+        </source>
+        <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a
+            web browser that
+            <a href="{{this.videos.medium.url}}" target="_blank">
+                supports HTML5 video
+            </a>
+        </p>
+    </video>
+    <div class="info">
+        <p class="info-item">
+            <b>{{this.tags}}</b>
+        </p>
+
+        <label aria-hidden="true" class="label-add-favorites ">
+            <input class="add-favorites" type="checkbox" aria-label="добавление в избранное" {{this.check}} />
+            <svg class="theme-switch__icon custom-checkbox" role="img" aria-label="Иконка солнца">
+                <use href="/sprite.svg#icon-star"></use>
+            </svg>
+        </label>
+
+        <p class="info-item">
+            <b class="likes"><svg class="theme-switch__icon" role="img" aria-label="Иконка солнца">
+                    <use href="sprite.svg#icon-likes"></use>
+                </svg>{{this.likes}}</b>
+        </p>
+        <p class="info-item">
+            <b class="views"><svg class="theme-switch__icon" role="img" aria-label="Иконка солнца">
+                    <use href="sprite.svg#icon-views"></use>
+                </svg>{{this.views}}</b>
+        </p>
+        <p class="info-item">
+            <b class="comments"><svg class="theme-switch__icon" role="img" aria-label="Иконка солнца">
+                    <use href="sprite.svg#icon-comments"></use>
+                </svg> {{this.comments}}</b>
+        </p>
+        <p class="info-item">
+            <b class="downloads">
+                <svg class="theme-switch__icon" role="img" aria-label="Иконка солнца">
+                    <use href="sprite.svg#icon-download"></use>
+                </svg> {{this.downloads}}</b>
+        </p>
+
+    </div>
+</div>
+
+{{/each}}
