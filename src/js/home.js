@@ -38,12 +38,7 @@ let currentPage = 1;
 
 let scroll = true;
 
-let currentLanguage = {
-  code: 'en',
-  class: 'lenguage-switch__marker--en',
-};
-currentLanguage = getCurrentLanguage();
-
+let currentLanguage = getCurrentLanguage();
 let currentSearchType = 'img';
 let currentImgType = '';
 // ----------------------------

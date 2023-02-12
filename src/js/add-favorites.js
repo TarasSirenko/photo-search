@@ -54,7 +54,7 @@ function fetchFavoritesCards(favoritesIdArr) {
       );
     }
 
-    if (type === 'film') {
+    if (type === 'film' || type === 'animation') {
       response = await fetch(
         `${BASE_URL}videos?id=${id}&lang=${currentLanguage.code}&${searchParams}`
       );
@@ -68,7 +68,7 @@ async function parseResponse(response) {
   const fetchInfo = await Promise.all(response);
 
   const cards = await fetchInfo.map(e => {
-    if (e.hits[0].type === 'film') {
+    if (e.hits[0].type === 'film' || e.hits[0].type === 'animation') {
       e.hits[0].picture_id = `${BASE_URL_VIDEO_PREVIEW}${e.hits[0].picture_id}_${previewSize}.jpg`;
     }
     e.hits[0].check = 'checked';
@@ -84,7 +84,7 @@ function createMarcup(cards) {
     cards.filter(card => Object.values(imgType).includes(card.type))
   );
   const videoCards = videoCardMarcup(
-    cards.filter(card => card.type === 'film')
+    cards.filter(card => card.type === 'film' || card.type === 'animation')
   );
   const marcup = photoCards + videoCards;
   return marcup;
@@ -176,7 +176,9 @@ function onPicturesBtnClick() {
 }
 function onVideoBtnClick() {
   if (!Refs.favoritesBtn.classList.contains('activ')) return;
-  const videoFavorites = favoritesCardArr.filter(card => card.type === 'film');
+  const videoFavorites = favoritesCardArr.filter(
+    card => card.type === 'film' || card.type === 'animation'
+  );
   cardRequest(videoFavorites);
 }
 
@@ -186,3 +188,5 @@ const imgType = {
   svg: 'vector/svg',
   ai: 'vector/ai',
 };
+
+// animation;
