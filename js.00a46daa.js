@@ -4292,7 +4292,11 @@ let requestUser = 'nature';
 let currentRequest = '';
 let currentPage = 1;
 let scroll = true;
-let currentLanguage = (0, _forLanguage.getCurrentLanguage)();
+let currentLanguage = {
+  code: 'en',
+  class: 'lenguage-switch__marker--en'
+};
+currentLanguage = (0, _forLanguage.getCurrentLanguage)();
 let currentSearchType = 'img';
 let currentImgType = '';
 // ----------------------------
@@ -4531,7 +4535,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1730" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4376" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
