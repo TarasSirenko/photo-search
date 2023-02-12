@@ -223,6 +223,7 @@ try {
     _refs.Refs.footer.classList.toggle(Theme.DARK);
     _refs.Refs.favoritesBtn.classList.toggle(Theme.DARK);
     _refs.Refs.homeBtn.classList.toggle(Theme.DARK);
+    _refs.Refs.imgTypesList.classList.toggle(Theme.DARK);
     _refs.Refs.checkbox.checked = true;
   }
 } catch {}
@@ -233,6 +234,7 @@ function onCheckboxChange() {
   _refs.Refs.footer.classList.toggle(Theme.DARK);
   _refs.Refs.favoritesBtn.classList.toggle(Theme.DARK);
   _refs.Refs.homeBtn.classList.toggle(Theme.DARK);
+  _refs.Refs.imgTypesList.classList.toggle(Theme.DARK);
   _refs.Refs.checkbox.checked ? currentTheme = Theme.DARK : currentTheme = Theme.LIGHT;
   localStorage.setItem('currentTheme', currentTheme);
 }
@@ -2008,7 +2010,7 @@ const templateFunction = _handlebars.default.template({
         }
         return undefined;
       };
-    return "\r\n<div class=\"photo-card\" data-id=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "id") : depth0, depth0)) + " data-type=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "type") : depth0, depth0)) + ">\r\n    <a class=\"card-link\" href=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "largeImageURL") : depth0, depth0)) + "\">\r\n        <img src=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "webformatURL") : depth0, depth0)) + "\" alt=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "\" loading=\"lazy\" class=\"card-img\" />\r\n    </a>\r\n    <div class=\"info\">\r\n        <p class=\"info-item\">\r\n            <b>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "</b>\r\n        </p>\r\n\r\n        <label aria-hidden=\"true\" class=\"label-add-favorites \">\r\n            <input class=\"add-favorites\" type=\"checkbox\" aria-label=\"добавление в избранное\" " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "check") : depth0, depth0)) + " />\r\n            <svg class=\"theme-switch__icon custom-checkbox\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                <use href=\"/sprite.svg#icon-star\"></use>\r\n            </svg>\r\n        </label>\r\n        <div class=\"info-wrapper\">\r\n            <p class=\"info-item\">\r\n                <b class=\"likes info-item--element\"><svg class=\"theme-switch__icon\" role=\"img\"\r\n                        aria-label=\"Иконка солнца\">\r\n                        <use href=\"/sprite.svg#icon-likes\"></use>\r\n                    </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "likes") : depth0, depth0)) + "</b>\r\n            </p>\r\n            <p class=\"info-item\">\r\n                <b class=\"views info-item--element\"><svg class=\"theme-switch__icon\" role=\"img\"\r\n                        aria-label=\"Иконка солнца\">\r\n                        <use href=\"/sprite.svg#icon-views\"></use>\r\n                    </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "views") : depth0, depth0)) + "</b>\r\n            </p>\r\n            <p class=\"info-item\">\r\n                <b class=\"comments info-item--element\"><svg class=\"theme-switch__icon\" role=\"img\"\r\n                        aria-label=\"Иконка солнца\">\r\n                        <use href=\"/sprite.svg#icon-comments\"></use>\r\n                    </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "comments") : depth0, depth0)) + "</b>\r\n            </p>\r\n            <p class=\"info-item\">\r\n                <b class=\"downloads info-item--element\">\r\n                    <svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                        <use href=\"/sprite.svg#icon-download\"></use>\r\n                    </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "downloads") : depth0, depth0)) + "</b>\r\n            </p>\r\n        </div>\r\n\r\n    </div>\r\n</div>\r\n\r\n";
+    return "\r\n<div class=\"photo-card\" data-id=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "id") : depth0, depth0)) + " data-type=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "type") : depth0, depth0)) + ">\r\n    <a class=\"card-link\" href=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "largeImageURL") : depth0, depth0)) + "\">\r\n        <img src=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "webformatURL") : depth0, depth0)) + "\" alt=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "\" loading=\"lazy\" class=\"card-img\" />\r\n    </a>\r\n    <div class=\"info\">\r\n        <p class=\"info-item\">\r\n            <b>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "</b>\r\n        </p>\r\n\r\n        <label aria-hidden=\"true\" class=\"label-add-favorites \">\r\n            <input class=\"add-favorites\" type=\"checkbox\" aria-label=\"добавление в избранное\" " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "check") : depth0, depth0)) + " />\r\n            <svg class=\"theme-switch__icon custom-checkbox\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                <use href=\"/photo-search/sprite.dc9ae70e.svg#icon-star\"></use>\r\n            </svg>\r\n        </label>\r\n        <div class=\"info-wrapper\">\r\n            <p class=\"info-item\">\r\n                <b class=\"likes info-item--element\"><svg class=\"theme-switch__icon\" role=\"img\"\r\n                        aria-label=\"Иконка солнца\">\r\n                        <use href=\"/photo-search/sprite.dc9ae70e.svg#icon-likes\"></use>\r\n                    </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "likes") : depth0, depth0)) + "</b>\r\n            </p>\r\n            <p class=\"info-item\">\r\n                <b class=\"views info-item--element\"><svg class=\"theme-switch__icon\" role=\"img\"\r\n                        aria-label=\"Иконка солнца\">\r\n                        <use href=\"/photo-search/sprite.dc9ae70e.svg#icon-views\"></use>\r\n                    </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "views") : depth0, depth0)) + "</b>\r\n            </p>\r\n            <p class=\"info-item\">\r\n                <b class=\"comments info-item--element\"><svg class=\"theme-switch__icon\" role=\"img\"\r\n                        aria-label=\"Иконка солнца\">\r\n                        <use href=\"/photo-search/sprite.dc9ae70e.svg#icon-comments\"></use>\r\n                    </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "comments") : depth0, depth0)) + "</b>\r\n            </p>\r\n            <p class=\"info-item\">\r\n                <b class=\"downloads info-item--element\">\r\n                    <svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                        <use href=\"/photo-search/sprite.dc9ae70e.svg#icon-download\"></use>\r\n                    </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "downloads") : depth0, depth0)) + "</b>\r\n            </p>\r\n        </div>\r\n\r\n    </div>\r\n</div>\r\n\r\n";
   },
   "compiler": [8, ">= 4.3.0"],
   "main": function (container, depth0, helpers, partials, data) {
@@ -2061,7 +2063,7 @@ const templateFunction = _handlebars.default.template({
         }
         return undefined;
       };
-    return "<div class=\"photo-card video\" data-id=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "id") : depth0, depth0)) + " data-type=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "type") : depth0, depth0)) + ">\r\n    <video id=\"my-player\" class=\"video-js vjs-theme-city\" controls preload=\"auto\" poster=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "picture_id") : depth0, depth0)) + "\" >\r\n        <source src=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" type=\"video/mp4\">\r\n        </source>\r\n        <source src=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" type=\"video/webm\">\r\n        </source>\r\n        <source src=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" type=\"video/ogg\">\r\n        </source>\r\n        <p class=\"vjs-no-js\">\r\n            To view this video please enable JavaScript, and consider upgrading to a\r\n            web browser that\r\n            <a href=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "medium") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" target=\"_blank\">\r\n                supports HTML5 video\r\n            </a>\r\n        </p>\r\n    </video>\r\n    <div class=\"info\">\r\n        <p class=\"info-item\">\r\n            <b>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "</b>\r\n        </p>\r\n\r\n        <label aria-hidden=\"true\" class=\"label-add-favorites \">\r\n            <input class=\"add-favorites\" type=\"checkbox\" aria-label=\"добавление в избранное\" " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "check") : depth0, depth0)) + " />\r\n            <svg class=\"theme-switch__icon custom-checkbox\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                <use href=\"/sprite.svg#icon-star\"></use>\r\n            </svg>\r\n        </label>\r\n\r\n        <p class=\"info-item\">\r\n            <b class=\"likes\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"sprite.svg#icon-likes\"></use>\r\n                </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "likes") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"views\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"sprite.svg#icon-views\"></use>\r\n                </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "views") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"comments\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"sprite.svg#icon-comments\"></use>\r\n                </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "comments") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"downloads\">\r\n                <svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"sprite.svg#icon-download\"></use>\r\n                </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "downloads") : depth0, depth0)) + "</b>\r\n        </p>\r\n\r\n    </div>\r\n</div>\r\n\r\n";
+    return "<div class=\"photo-card video\" data-id=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "id") : depth0, depth0)) + " data-type=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "type") : depth0, depth0)) + ">\r\n    <video id=\"my-player\" class=\"video-js vjs-theme-city\" controls preload=\"auto\" poster=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "picture_id") : depth0, depth0)) + "\" >\r\n        <source src=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" type=\"video/mp4\">\r\n        </source>\r\n        <source src=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" type=\"video/webm\">\r\n        </source>\r\n        <source src=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" type=\"video/ogg\">\r\n        </source>\r\n        <p class=\"vjs-no-js\">\r\n            To view this video please enable JavaScript, and consider upgrading to a\r\n            web browser that\r\n            <a href=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "medium") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" target=\"_blank\">\r\n                supports HTML5 video\r\n            </a>\r\n        </p>\r\n    </video>\r\n    <div class=\"info\">\r\n        <p class=\"info-item\">\r\n            <b>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "</b>\r\n        </p>\r\n\r\n        <label aria-hidden=\"true\" class=\"label-add-favorites \">\r\n            <input class=\"add-favorites\" type=\"checkbox\" aria-label=\"добавление в избранное\" " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "check") : depth0, depth0)) + " />\r\n            <svg class=\"theme-switch__icon custom-checkbox\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                <use href=\"/photo-search/sprite.dc9ae70e.svg#icon-star\"></use>\r\n            </svg>\r\n        </label>\r\n\r\n        <p class=\"info-item\">\r\n            <b class=\"likes\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"/photo-search/sprite.dc9ae70e.svg#icon-likes\"></use>\r\n                </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "likes") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"views\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"/photo-search/sprite.dc9ae70e.svg#icon-views\"></use>\r\n                </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "views") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"comments\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"/photo-search/sprite.dc9ae70e.svg#icon-comments\"></use>\r\n                </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "comments") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"downloads\">\r\n                <svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"/photo-search/sprite.dc9ae70e.svg#icon-download\"></use>\r\n                </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "downloads") : depth0, depth0)) + "</b>\r\n        </p>\r\n\r\n    </div>\r\n</div>\r\n\r\n";
   },
   "compiler": [8, ">= 4.3.0"],
   "main": function (container, depth0, helpers, partials, data) {
@@ -2072,7 +2074,7 @@ const templateFunction = _handlebars.default.template({
         }
         return undefined;
       };
-    return (stack1 = lookupProperty(helpers, "each").call(depth0 != null ? depth0 : container.nullContext || {}, depth0, {
+    return ((stack1 = lookupProperty(helpers, "each").call(depth0 != null ? depth0 : container.nullContext || {}, depth0, {
       "name": "each",
       "hash": {},
       "fn": container.program(1, data, 0),
@@ -2088,7 +2090,7 @@ const templateFunction = _handlebars.default.template({
           "column": 9
         }
       }
-    })) != null ? stack1 : "";
+    })) != null ? stack1 : "") + "\r\n";
   },
   "useData": true
 });
@@ -3765,7 +3767,7 @@ function fetchFavoritesCards(favoritesIdArr) {
     if (Object.values(imgType).includes(type)) {
       response = await fetch(`${_fetchParams.BASE_URL}?id=${id}&lang=${currentLanguage.code}&${_fetchParams.searchParams}`);
     }
-    if (type === 'film') {
+    if (type === 'film' || type === 'animation') {
       response = await fetch(`${_fetchParams.BASE_URL}videos?id=${id}&lang=${currentLanguage.code}&${_fetchParams.searchParams}`);
     }
     return response.json();
@@ -3774,7 +3776,7 @@ function fetchFavoritesCards(favoritesIdArr) {
 async function parseResponse(response) {
   const fetchInfo = await Promise.all(response);
   const cards = await fetchInfo.map(e => {
-    if (e.hits[0].type === 'film') {
+    if (e.hits[0].type === 'film' || e.hits[0].type === 'animation') {
       e.hits[0].picture_id = `${_fetchParams.BASE_URL_VIDEO_PREVIEW}${e.hits[0].picture_id}_${_fetchParams.previewSize}.jpg`;
     }
     e.hits[0].check = 'checked';
@@ -3786,7 +3788,7 @@ function createMarcup(cards) {
   // console.log(cards);
 
   const photoCards = (0, _imgCardMarcup.default)(cards.filter(card => Object.values(imgType).includes(card.type)));
-  const videoCards = (0, _videoCardMarcup.default)(cards.filter(card => card.type === 'film'));
+  const videoCards = (0, _videoCardMarcup.default)(cards.filter(card => card.type === 'film' || card.type === 'animation'));
   const marcup = photoCards + videoCards;
   return marcup;
 }
@@ -3869,7 +3871,7 @@ function onPicturesBtnClick() {
 }
 function onVideoBtnClick() {
   if (!_refs.Refs.favoritesBtn.classList.contains('activ')) return;
-  const videoFavorites = favoritesCardArr.filter(card => card.type === 'film');
+  const videoFavorites = favoritesCardArr.filter(card => card.type === 'film' || card.type === 'animation');
   cardRequest(videoFavorites);
 }
 const imgType = {
@@ -3878,6 +3880,8 @@ const imgType = {
   svg: 'vector/svg',
   ai: 'vector/ai'
 };
+
+// animation;
 },{"../hbs/imgCardMarcup.hbs":"hbs/imgCardMarcup.hbs","../hbs/videoCardMarcup.hbs":"hbs/videoCardMarcup.hbs","./refs.js":"js/refs.js","./utils/light-box.js":"js/utils/light-box.js","./fetch-params.js":"js/fetch-params.js","./utils/for-language.js":"js/utils/for-language.js"}],"../node_modules/notiflix/dist/notiflix-aio-3.2.6.min.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
@@ -4292,11 +4296,7 @@ let requestUser = 'nature';
 let currentRequest = '';
 let currentPage = 1;
 let scroll = true;
-let currentLanguage = {
-  code: 'en',
-  class: 'lenguage-switch__marker--en'
-};
-currentLanguage = (0, _forLanguage.getCurrentLanguage)();
+let currentLanguage = (0, _forLanguage.getCurrentLanguage)();
 let currentSearchType = 'img';
 let currentImgType = '';
 // ----------------------------
@@ -4535,7 +4535,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4376" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "13262" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

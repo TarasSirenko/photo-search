@@ -345,6 +345,9 @@ pointer-events: none;
         transition: transform 250ms;
     
 }
+.img-types.dark-theme {
+    background-color:rgb(51, 51, 51, 0.9);
+}
 .img-types.open {
 transform: translate(-50%, 0%);
 pointer-events: auto;
@@ -360,6 +363,9 @@ opacity: 1;
 }
 .img-types-item.activ {
    background-color:rgb(246, 246, 246);
+}
+.img-types.dark-theme .img-types-item.activ {
+    color: rgb(51, 51, 51, 0.9);
 }
 
 .form-wrapper {
