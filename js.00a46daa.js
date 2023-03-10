@@ -296,11 +296,36 @@ module.exports = {
     "ru": "вектор"
   }
 };
+},{}],"js/utils/for-language.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getCurrentLanguage = getCurrentLanguage;
+exports.updateCurrentLanguage = updateCurrentLanguage;
+function getCurrentLanguage() {
+  let currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
+  if (!currentLanguage) {
+    currentLanguage = {
+      code: 'en',
+      class: 'lenguage-switch__marker--en'
+    };
+    localStorage.setItem('currentLanguage', JSON.stringify(currentLanguage));
+  }
+  ;
+  return currentLanguage;
+}
+function updateCurrentLanguage(currentLanguage) {
+  if (JSON.parse(localStorage.getItem('currentLanguage'))) currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
+  return currentLanguage;
+}
 },{}],"js/change-language.js":[function(require,module,exports) {
 "use strict";
 
 var _language = _interopRequireDefault(require("../language.json"));
 var _refs = require("./refs.js");
+var _forLanguage = require("./utils/for-language.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const lenguages = {
   ru: {
@@ -316,17 +341,14 @@ const lenguages = {
     class: 'lenguage-switch__marker--en'
   }
 };
+// if (JSON.parse(localStorage.getItem('currentLanguage'))) {
+//   currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
+// } else {
+//   currentLanguage = lenguages.en;
+// }
 // localStorage.removeItem('currentLanguage');
 // выбор языка при загрузке страницы -------------------------
-let currentLanguage = {
-  code: 'en',
-  class: 'lenguage-switch__marker--en'
-};
-if (JSON.parse(localStorage.getItem('currentLanguage'))) {
-  currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
-} else {
-  currentLanguage = lenguages.en;
-}
+let currentLanguage = (0, _forLanguage.getCurrentLanguage)();
 function changeLanguage() {
   if (JSON.parse(localStorage.getItem('currentLanguage'))) currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
   for (const key in _language.default) {
@@ -412,7 +434,7 @@ function closesLanguagesList(e) {
 // };
 
 // console.log(JSON.stringify(languageTaras));
-},{"../language.json":"language.json","./refs.js":"js/refs.js"}],"js/go-up-btn.js":[function(require,module,exports) {
+},{"../language.json":"language.json","./refs.js":"js/refs.js","./utils/for-language.js":"js/utils/for-language.js"}],"js/go-up-btn.js":[function(require,module,exports) {
 "use strict";
 
 var _refs = require("./refs.js");
@@ -3693,26 +3715,6 @@ const BASE_URL_VIDEO_PREVIEW = 'https://i.vimeocdn.com/video/';
 exports.BASE_URL_VIDEO_PREVIEW = BASE_URL_VIDEO_PREVIEW;
 const previewSize = '640x360';
 exports.previewSize = previewSize;
-},{}],"js/utils/for-language.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getCurrentLanguage = getCurrentLanguage;
-exports.updateCurrentLanguage = updateCurrentLanguage;
-function getCurrentLanguage() {
-  let currentLanguage = {
-    code: 'en',
-    class: 'lenguage-switch__marker--en'
-  };
-  if (JSON.parse(localStorage.getItem('currentLanguage'))) currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
-  return currentLanguage;
-}
-function updateCurrentLanguage(currentLanguage) {
-  if (JSON.parse(localStorage.getItem('currentLanguage'))) currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
-  return currentLanguage;
-}
 },{}],"js/add-favorites.js":[function(require,module,exports) {
 "use strict";
 
@@ -3733,8 +3735,8 @@ let currentLanguage = (0, _forLanguage.getCurrentLanguage)();
 // проверка localStorage на информацию о избранных обектих
 
 let favoritesCardArr = [];
-// localStorage.removeItem('favoritesCard');
 exports.favoritesCardArr = favoritesCardArr;
+localStorage.removeItem('favoritesCard');
 if (localStorage.getItem('favoritesCard')) {
   exports.favoritesCardArr = favoritesCardArr = JSON.parse(localStorage.getItem('favoritesCard'));
 }
@@ -3752,27 +3754,40 @@ function onFavoritesBtnClick(event) {
   changeActivePage(event);
 }
 async function cardRequest(favoritesCards) {
-  const response = await fetchFavoritesCards(favoritesCards);
-  const cards = await parseResponse(response);
-  const cardsMarkup = createMarcup(cards);
-  renderCard(cardsMarkup);
+  try {
+    const response = await fetchFavoritesCards(favoritesCards);
+    const cards = await parseResponse(response);
+    const cardsMarkup = createMarcup(cards);
+    renderCard(cardsMarkup);
+  } catch (error) {
+    console.error('Ошибка при выполнении запроса:', error);
+    // здесь можно обработать ошибку, например, вывести сообщение на экран или выполнить другие действия
+  }
 }
-function fetchFavoritesCards(favoritesIdArr) {
-  return favoritesIdArr.map(async _ref => {
-    let {
-      id,
-      type
-    } = _ref;
-    let response;
-    if (Object.values(imgType).includes(type)) {
-      response = await fetch(`${_fetchParams.BASE_URL}?id=${id}&lang=${currentLanguage.code}&${_fetchParams.searchParams}`);
-    }
-    if (type === 'film' || type === 'animation') {
-      response = await fetch(`${_fetchParams.BASE_URL}videos?id=${id}&lang=${currentLanguage.code}&${_fetchParams.searchParams}`);
-    }
-    return response.json();
-  });
+
+async function fetchFavoritesCards(favoritesIdArr) {
+  try {
+    const fetchPromises = favoritesIdArr.map(async _ref => {
+      let {
+        id,
+        type
+      } = _ref;
+      let response;
+      if (Object.values(imgType).includes(type)) {
+        response = await fetch(`${_fetchParams.BASE_URL}?id=${id}&lang=${currentLanguage.code}&${_fetchParams.searchParams}`);
+      }
+      if (type === 'film' || type === 'animation') {
+        response = await fetch(`${_fetchParams.BASE_URL}videos?id=${id}&lang=${currentLanguage.code}&${_fetchParams.searchParams}`);
+      }
+      return response.json();
+    });
+    return await Promise.all(fetchPromises);
+  } catch (error) {
+    console.error('Ошибка при выполнении запроса:', error);
+    throw error; // пробрасываем ошибку дальше
+  }
 }
+
 async function parseResponse(response) {
   const fetchInfo = await Promise.all(response);
   const cards = await fetchInfo.map(e => {
@@ -4333,25 +4348,44 @@ function clearPage() {
   _refs.Refs.loadMoreButton.classList.add('visually-hidden');
 }
 async function cardRequest(type) {
-  const responseObj = await fetchCard(type);
-  const isValidRequest = await responseCheck(responseObj);
-  if (!isValidRequest) return;
-  const cardsArr = await preparingObjForMarkup(responseObj, type);
-  await showLoadMoreBtn();
-  await renderCards(cardsArr, type);
-  await scrollPage(currentPage, scroll);
-  await whenQueryResultsEnd(currentPage, responseObj);
+  try {
+    const responseObj = await fetchCard(type);
+    const isValidRequest = await responseCheck(responseObj);
+    if (!isValidRequest) return;
+    const cardsArr = await preparingObjForMarkup(responseObj, type);
+    await showLoadMoreBtn();
+    await renderCards(cardsArr, type);
+    await scrollPage(currentPage, scroll);
+    await whenQueryResultsEnd(currentPage, responseObj);
+  } catch (error) {
+    console.error(error);
+  }
 }
 async function fetchCard(type) {
   currentLanguage = (0, _forLanguage.updateCurrentLanguage)();
   currentRequest = requestUser;
-  const response = await requestFetch(type);
-  const objImgCards = await response.json();
-  return objImgCards;
+  try {
+    const response = await requestFetch(type);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data from API: ${response.statusText}`);
+    }
+    const objImgCards = await response.json();
+    return objImgCards;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 function requestFetch(type) {
-  if (type === 'img') return fetch(`${_fetchParams.BASE_URL}?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&image_type=${currentImgType}&${_fetchParams.searchParams}`);
-  if (type === 'video') return fetch(`${_fetchParams.BASE_URL}videos?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&${_fetchParams.searchParams}`);
+  currentLanguage = (0, _forLanguage.getCurrentLanguage)();
+  if (type === 'img') return fetch(`${_fetchParams.BASE_URL}?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&image_type=${currentImgType}&${_fetchParams.searchParams}`).catch(error => {
+    console.error(error);
+    throw new Error(`Error fetching ${type} cards: ${error.message}`);
+  });
+  if (type === 'video') return fetch(`${_fetchParams.BASE_URL}videos?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&${_fetchParams.searchParams}`).catch(error => {
+    console.error(error);
+    throw new Error(`Error fetching ${type} cards: ${error.message}`);
+  });
 }
 function responseCheck(response) {
   if (response.totalHits === 0) {
@@ -4535,7 +4569,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "13262" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5671" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
