@@ -82,31 +82,50 @@ function clearPage() {
   Refs.loadMoreButton.classList.add('visually-hidden');
 }
 async function cardRequest(type) {
-  const responseObj = await fetchCard(type);
-  const isValidRequest = await responseCheck(responseObj);
-  if (!isValidRequest) return;
-  const cardsArr = await preparingObjForMarkup(responseObj, type);
-  await showLoadMoreBtn();
-  await renderCards(cardsArr, type);
-  await scrollPage(currentPage, scroll);
-  await whenQueryResultsEnd(currentPage, responseObj);
+  try {
+    const responseObj = await fetchCard(type);
+    const isValidRequest = await responseCheck(responseObj);
+    if (!isValidRequest) return;
+    const cardsArr = await preparingObjForMarkup(responseObj, type);
+    await showLoadMoreBtn();
+    await renderCards(cardsArr, type);
+    await scrollPage(currentPage, scroll);
+    await whenQueryResultsEnd(currentPage, responseObj);
+  } catch (error) {
+    console.error(error);
+  }
 }
 async function fetchCard(type) {
   currentLanguage = updateCurrentLanguage();
   currentRequest = requestUser;
-  const response = await requestFetch(type);
-  const objImgCards = await response.json();
-  return objImgCards;
+  try {
+    const response = await requestFetch(type);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data from API: ${response.statusText}`);
+    }
+    const objImgCards = await response.json();
+    return objImgCards;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 function requestFetch(type) {
-  if (type === 'img')
+    currentLanguage = getCurrentLanguage();
+  if (type === 'img') 
     return fetch(
       `${BASE_URL}?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&image_type=${currentImgType}&${searchParams}`
-    );
+    ).catch(error => {
+console.error(error);
+throw new Error(`Error fetching ${type} cards: ${error.message}`);
+});
   if (type === 'video')
     return fetch(
       `${BASE_URL}videos?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&${searchParams}`
-    );
+    ).catch(error => {
+console.error(error);
+throw new Error(`Error fetching ${type} cards: ${error.message}`);
+});
 }
 function responseCheck(response) {
   if (response.totalHits === 0) {

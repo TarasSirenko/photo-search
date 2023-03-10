@@ -20,7 +20,7 @@ let currentLanguage = getCurrentLanguage();
 // проверка localStorage на информацию о избранных обектих
 
 let favoritesCardArr = [];
-// localStorage.removeItem('favoritesCard');
+localStorage.removeItem('favoritesCard');
 if (localStorage.getItem('favoritesCard')) {
   favoritesCardArr = JSON.parse(localStorage.getItem('favoritesCard'));
 }
@@ -40,28 +40,37 @@ function onFavoritesBtnClick(event) {
 }
 
 async function cardRequest(favoritesCards) {
-  const response = await fetchFavoritesCards(favoritesCards);
-  const cards = await parseResponse(response);
-  const cardsMarkup = createMarcup(cards);
-  renderCard(cardsMarkup);
+  try {
+    const response = await fetchFavoritesCards(favoritesCards);
+    const cards = await parseResponse(response);
+    const cardsMarkup = createMarcup(cards);
+    renderCard(cardsMarkup);
+  } catch (error) {
+    console.error('Ошибка при выполнении запроса:', error);
+    // здесь можно обработать ошибку, например, вывести сообщение на экран или выполнить другие действия
+  }
 }
-function fetchFavoritesCards(favoritesIdArr) {
-  return favoritesIdArr.map(async ({ id, type }) => {
-    let response;
-    if (Object.values(imgType).includes(type)) {
-      response = await fetch(
-        `${BASE_URL}?id=${id}&lang=${currentLanguage.code}&${searchParams}`
-      );
-    }
-
-    if (type === 'film' || type === 'animation') {
-      response = await fetch(
-        `${BASE_URL}videos?id=${id}&lang=${currentLanguage.code}&${searchParams}`
-      );
-    }
-
-    return response.json();
-  });
+async function fetchFavoritesCards(favoritesIdArr) {
+  try {
+    const fetchPromises = favoritesIdArr.map(async ({ id, type }) => {
+      let response;
+      if (Object.values(imgType).includes(type)) {
+        response = await fetch(
+          `${BASE_URL}?id=${id}&lang=${currentLanguage.code}&${searchParams}`
+        );
+      }
+      if (type === 'film' || type === 'animation') {
+        response = await fetch(
+          `${BASE_URL}videos?id=${id}&lang=${currentLanguage.code}&${searchParams}`
+        );
+      }
+      return response.json();
+    });
+    return await Promise.all(fetchPromises);
+  } catch (error) {
+    console.error('Ошибка при выполнении запроса:', error);
+    throw error; // пробрасываем ошибку дальше
+  }
 }
 
 async function parseResponse(response) {

@@ -1,5 +1,9 @@
 import lengArr from '../language.json';
 import { Refs } from './refs.js';
+import {
+  getCurrentLanguage,
+  updateCurrentLanguage,
+} from './utils/for-language.js';
 const lenguages = {
   ru: {
     code: 'ru',
@@ -14,19 +18,14 @@ const lenguages = {
     class: 'lenguage-switch__marker--en',
   },
 };
+// if (JSON.parse(localStorage.getItem('currentLanguage'))) {
+//   currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
+// } else {
+//   currentLanguage = lenguages.en;
+// }
 // localStorage.removeItem('currentLanguage');
 // выбор языка при загрузке страницы -------------------------
-let currentLanguage = {
-  code: 'en',
-  class: 'lenguage-switch__marker--en',
-};
-
-if (JSON.parse(localStorage.getItem('currentLanguage'))) {
-  currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
-} else {
-  currentLanguage = lenguages.en;
-}
-
+let currentLanguage = getCurrentLanguage();
 function changeLanguage() {
   if (JSON.parse(localStorage.getItem('currentLanguage')))
     currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
